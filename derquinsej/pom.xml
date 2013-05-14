@@ -43,8 +43,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -90,7 +90,7 @@
 					<minmemory>256m</minmemory>
 					<maxmemory>640m</maxmemory>
 					<links>
-						<link>http://docs.guava-libraries.googlecode.com/git-history/v13.0.1/javadoc/</link>
+						<link>http://docs.guava-libraries.googlecode.com/git-history/v14.0.1/javadoc/</link>
 						<link>http://joda-time.sourceforge.net/api-release</link>
 						<link>http://docs.jboss.org/hibernate/core/3.6/javadocs</link>
 						<link>http://docs.oracle.com/javaee/6/api</link>
@@ -106,8 +106,8 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.google.guava</groupId>
-				<artifactId>guava-jdk5</artifactId>
-				<version>13.0</version>
+				<artifactId>guava</artifactId>
+				<version>14.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.code.findbugs</groupId>
@@ -117,7 +117,7 @@
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 			</dependency>
 			<!-- Hibernate -->
 			<dependency>
@@ -140,28 +140,28 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
-				<version>1.7.1</version>
+				<version>1.7.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>1.7.1</version>
+				<version>1.7.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.1</version>
+				<version>1.7.5</version>
 			</dependency>
 			<!-- Logback -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
-				<version>1.0.7</version>
+				<version>1.0.12</version>
 			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
-				<version>1.0.7</version>
+				<version>1.0.12</version>
 			</dependency>
 			<!-- Hessian -->
 			<dependency>
@@ -186,7 +186,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
-			<artifactId>guava-jdk5</artifactId>
+			<artifactId>guava</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
