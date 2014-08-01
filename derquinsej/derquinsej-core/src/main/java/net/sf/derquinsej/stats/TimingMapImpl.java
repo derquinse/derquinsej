@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2009 the original author or authors.
+ * Copyright (C) the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,12 @@ import static java.util.Collections.unmodifiableMap;
 import static net.sf.derquinsej.stats.Timings.atomicGetter;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ForwardingMap;
-import com.google.common.collect.MapMaker;
 
 /**
  * Timing map implementation.
@@ -34,8 +35,8 @@ import com.google.common.collect.MapMaker;
  * @param <K> The type of keys.
  */
 final class TimingMapImpl<K> extends ForwardingMap<K, Timing> implements TimingMap<K> {
-	/** Concurrent map. */
-	private final ConcurrentMap<K, AtomicTiming> map;
+	/** Loading cache. */
+	private final LoadingCache<K, AtomicTiming> cache;
 	/** Unmodifiable view. */
 	private final Map<K, Timing> view;
 
@@ -44,8 +45,8 @@ final class TimingMapImpl<K> extends ForwardingMap<K, Timing> implements TimingM
 	 * @param unit Time unit to use.
 	 */
 	TimingMapImpl(TimeUnit unit) {
-		this.map = new MapMaker().makeComputingMap(compose(Timings.atomicCreator(), constant(unit)));
-		this.view = unmodifiableMap(transformValues(map, atomicGetter()));
+		this.cache = CacheBuilder.newBuilder().build(CacheLoader.from(compose(Timings.atomicCreator(), constant(unit))));
+		this.view = unmodifiableMap(transformValues(cache.asMap(), atomicGetter()));
 	}
 
 	@Override
@@ -59,25 +60,24 @@ final class TimingMapImpl<K> extends ForwardingMap<K, Timing> implements TimingM
 	 * java.util.concurrent.TimeUnit)
 	 */
 	public Timing add(K key, long time, TimeUnit unit) {
-		return map.get(key).add(time, unit).get();
+		return cache.getUnchecked(key).add(time, unit).get();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.derquinsej.stats.TimingMap#add(java.lang.Object,
-	 * java.lang.Number, java.util.concurrent.TimeUnit)
+	 * @see net.sf.derquinsej.stats.TimingMap#add(java.lang.Object, java.lang.Number,
+	 * java.util.concurrent.TimeUnit)
 	 */
 	public Timing add(K key, Number time, TimeUnit unit) {
-		return map.get(key).add(time, unit).get();
+		return cache.getUnchecked(key).add(time, unit).get();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.derquinsej.stats.TimingMap#add(java.lang.Object,
-	 * java.lang.Number)
+	 * @see net.sf.derquinsej.stats.TimingMap#add(java.lang.Object, java.lang.Number)
 	 */
 	public Timing add(K key, Number time) {
-		return map.get(key).add(time).get();
+		return cache.getUnchecked(key).add(time).get();
 	}
 
 	/*
@@ -86,7 +86,7 @@ final class TimingMapImpl<K> extends ForwardingMap<K, Timing> implements TimingM
 	 */
 	@Override
 	public void clear() {
-		map.clear();
+		cache.invalidateAll();
 	}
 
 	/*
@@ -94,14 +94,15 @@ final class TimingMapImpl<K> extends ForwardingMap<K, Timing> implements TimingM
 	 * @see net.sf.derquinsej.stats.TimingMap#add(java.lang.Object, long)
 	 */
 	public Timing add(K key, long time) {
-		return map.get(key).add(time).get();
+		return cache.getUnchecked(key).add(time).get();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.google.common.collect.ForwardingObject#toString()
 	 */
 	@Override
 	public String toString() {
-		return map.toString();
+		return cache.asMap().toString();
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2009 the original author or authors.
+ * Copyright (C) the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ final class NormalLongQuantile implements PartialRealFunction {
 
 	@Override
 	public String toString() {
-		return String.format((Locale) null, "qtl[N(%f,%f)]:{%f,%f,%f,%f,%f,%f,%f,%f}", population.getMean(), population
-				.getSigma(), apply(0.1), apply(0.2), apply(0.3), apply(0.4), apply(0.5), apply(0.6), apply(0.7),
+		return String.format((Locale) null, "qtl[N(%f,%f)]:{%f,%f,%f,%f,%f,%f,%f,%f,%f}", population.getMean(),
+				population.getSigma(), apply(0.1), apply(0.2), apply(0.3), apply(0.4), apply(0.5), apply(0.6), apply(0.7),
 				apply(0.8), apply(0.9));
 	}
 }

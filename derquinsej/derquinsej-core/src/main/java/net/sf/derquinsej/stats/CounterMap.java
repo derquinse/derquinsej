@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2009 the original author or authors.
+ * Copyright (C) the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,27 +21,28 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ForwardingMap;
-import com.google.common.collect.MapMaker;
 
 /**
- * A concurrent counter map. All the map-modifying operations except add and
- * reset throw UnsupportedOperationException
+ * A concurrent counter map. All the map-modifying operations except add and reset throw
+ * UnsupportedOperationException
  * @author Andres Rodriguez
  * @param <K> The type of keys.
  */
 public final class CounterMap<K> extends ForwardingMap<K, Counter> {
-	/** Concurrent map. */
-	private final ConcurrentMap<K, Counter> map;
+	/** Loading cache. */
+	private final LoadingCache<K, Counter> cache;
 	/** Unmodifiable view. */
 	private final Map<K, Counter> view;
 
 	/** Constructor. */
 	private CounterMap() {
-		this.map = new MapMaker().makeComputingMap(compose(Counter.creator(), constant(0L)));
-		this.view = Collections.unmodifiableMap(map);
+		this.cache = CacheBuilder.newBuilder().build(CacheLoader.from(compose(Counter.creator(), constant(0L))));
+		this.view = Collections.unmodifiableMap(cache.asMap());
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public final class CounterMap<K> extends ForwardingMap<K, Counter> {
 	 */
 	public long add(K key, long delta) {
 		checkArgument(delta >= 0, "The argument %d should be >=0", delta);
-		return map.get(key).add(delta);
+		return cache.getUnchecked(key).add(delta);
 	}
 
 	/**
@@ -67,7 +68,7 @@ public final class CounterMap<K> extends ForwardingMap<K, Counter> {
 	 * @return The updated value.
 	 */
 	public long add(K key) {
-		return map.get(key).add();
+		return cache.getUnchecked(key).add();
 	}
 
 	/**
@@ -75,7 +76,7 @@ public final class CounterMap<K> extends ForwardingMap<K, Counter> {
 	 * @param key Counter key.
 	 */
 	public void reset(K key) {
-		map.get(key).reset();
+		cache.getUnchecked(key).reset();
 	}
 
 }

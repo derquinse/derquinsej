@@ -35,7 +35,7 @@ public class LocalizedBuilderTest {
 
 	@BeforeMethod
 	public void init() {
-		builder = new LocalizedBuilder<String>();
+		builder = LocalizedBuilder.create();
 	}
 
 	@Test

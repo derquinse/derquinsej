@@ -22,7 +22,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -123,7 +123,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> extends Abstrac
 	@SuppressWarnings("unchecked")
 	public T findById(ID id, boolean lock) {
 		if (lock) {
-			return (T) getSession().get(persistentClass, id, LockMode.UPGRADE);
+			return (T) getSession().get(persistentClass, id, LockOptions.UPGRADE);
 		}
 		return (T) getSession().get(persistentClass, id);
 	}

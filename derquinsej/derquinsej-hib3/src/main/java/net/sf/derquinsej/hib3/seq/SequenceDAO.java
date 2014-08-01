@@ -15,17 +15,16 @@
  */
 package net.sf.derquinsej.hib3.seq;
 
-import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.common.base.Preconditions;
 
 /**
- * Data access object for the sequence entity. As it represents a very specific
- * case, it does not follow normal best-practices (interface-based, etc.).
- * WARNING: Transactional sequences are a source of locks and may hurt
- * scalability.
+ * Data access object for the sequence entity. As it represents a very specific case, it does not
+ * follow normal best-practices (interface-based, etc.). WARNING: Transactional sequences are a
+ * source of locks and may hurt scalability.
  * @author Andres Rodriguez
  */
 public class SequenceDAO {
@@ -53,7 +52,7 @@ public class SequenceDAO {
 	public long getCurrentValue(final String id) throws SequenceNotFoundException {
 		nonNull(id);
 		final Session session = sessionFactory.getCurrentSession();
-		final Sequence sequence = (Sequence) session.get(Sequence.class, id, LockMode.READ);
+		final Sequence sequence = (Sequence) session.get(Sequence.class, id, LockOptions.READ);
 		if (sequence == null) {
 			throw new SequenceNotFoundException(id);
 		}
@@ -61,8 +60,7 @@ public class SequenceDAO {
 	}
 
 	/**
-	 * Gets the next value of a sequence. The row is locked in the current
-	 * transaction.
+	 * Gets the next value of a sequence. The row is locked in the current transaction.
 	 * @param id Sequence name.
 	 * @return The next value of the specified sequence.
 	 * @throws SequenceNotFoundException if the sequence is not found.
@@ -70,7 +68,7 @@ public class SequenceDAO {
 	public long getNextValue(final String id) throws SequenceNotFoundException {
 		nonNull(id);
 		final Session session = sessionFactory.getCurrentSession();
-		final Sequence sequence = (Sequence) session.get(Sequence.class, id, LockMode.UPGRADE);
+		final Sequence sequence = (Sequence) session.get(Sequence.class, id, LockOptions.UPGRADE);
 		if (sequence == null) {
 			throw new SequenceNotFoundException(id);
 		}
@@ -89,7 +87,7 @@ public class SequenceDAO {
 	public long getNextValue(final String id, final long initial, final long increment) {
 		nonNull(id);
 		final Session session = sessionFactory.getCurrentSession();
-		Sequence sequence = (Sequence) session.get(Sequence.class, id, LockMode.UPGRADE);
+		Sequence sequence = (Sequence) session.get(Sequence.class, id, LockOptions.UPGRADE);
 		if (sequence != null) {
 			return sequence.getNext();
 		}

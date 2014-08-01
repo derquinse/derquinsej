@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 
@@ -41,7 +41,7 @@ public class GeneralDAOImpl extends AbstractDAOImpl implements GeneralDAO {
 	 */
 	public GeneralDAOImpl() {
 	}
-	
+
 	/**
 	 * Returns a new criteria object.
 	 * @param type Entity type.
@@ -66,7 +66,6 @@ public class GeneralDAOImpl extends AbstractDAOImpl implements GeneralDAO {
 		final List<T> list = criteria.list();
 		return list;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -102,7 +101,7 @@ public class GeneralDAOImpl extends AbstractDAOImpl implements GeneralDAO {
 	@SuppressWarnings("unchecked")
 	public <T> T findById(Class<T> type, Serializable id, boolean lock) {
 		if (lock) {
-			return (T) getSession().get(type, id, LockMode.UPGRADE);
+			return (T) getSession().get(type, id, LockOptions.UPGRADE);
 		}
 		return (T) getSession().get(type, id);
 	}
