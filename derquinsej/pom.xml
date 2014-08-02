@@ -10,7 +10,7 @@
 	<artifactId>derquinsej</artifactId>
 	<packaging>pom</packaging>
 	<name>Derquinse Modules for Java</name>
-	<version>0.2.1-SNAPSHOT</version>
+	<version>0.2.1</version>
 	<description />
 	<url>http://derquinsej.sf.net</url>
 	<developers>
