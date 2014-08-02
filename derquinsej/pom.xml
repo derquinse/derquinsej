@@ -10,7 +10,7 @@
 	<artifactId>derquinsej</artifactId>
 	<packaging>pom</packaging>
 	<name>Derquinse Modules for Java</name>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<description />
 	<url>http://derquinsej.sf.net</url>
 	<developers>
@@ -77,6 +77,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
 				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
 					<minmemory>256m</minmemory>
 					<maxmemory>640m</maxmemory>
 					<links>
@@ -95,19 +96,9 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>17.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.code.findbugs</groupId>
-				<artifactId>jsr305</artifactId>
-				<version>3.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>2.4</version>
+				<groupId>net.derquinse</groupId>
+				<artifactId>derquinse-common-base</artifactId>
+				<version>1.0.36</version>
 			</dependency>
 			<!-- Hibernate -->
 			<dependency>
@@ -175,17 +166,12 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
+			<groupId>net.derquinse</groupId>
+			<artifactId>derquinse-common-base</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>jsr305</artifactId>
-			<type>jar</type>
 		</dependency>
 	</dependencies>
 	<modules>
