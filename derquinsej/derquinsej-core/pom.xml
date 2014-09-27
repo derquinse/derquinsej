@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>derquinsej</artifactId>
 		<groupId>net.sf.derquinsej</groupId>
-		<version>0.2.2</version>
+		<version>0.2.3</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>derquinsej-core</artifactId>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>net.sf.derquinsej</groupId>
 			<artifactId>derquinsej-test-support</artifactId>
-			<version>0.2.2</version>
+			<version>0.2.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

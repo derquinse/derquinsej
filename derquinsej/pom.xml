@@ -10,7 +10,7 @@
 	<artifactId>derquinsej</artifactId>
 	<packaging>pom</packaging>
 	<name>Derquinse Modules for Java</name>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<description />
 	<url>http://derquinsej.sf.net</url>
 	<developers>
@@ -28,9 +28,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:git:https://code.google.com/p/derquinse-commons.derquinsej/</connection>
-		<developerConnection>scm:git:https://code.google.com/p/derquinse-commons.derquinsej/</developerConnection>
-		<url>http://code.google.com/p/derquinse-commons/source/browse/?repo=derquinsej</url>
+		<connection>https://github.com/derquinse/derquinsej.git</connection>
+		<developerConnection>https://github.com/derquinse/derquinsej.git</developerConnection>
+		<url>https://github.com/derquinse/derquinsej</url>
 		<tag>HEAD</tag>
 	</scm>
 	<properties>
@@ -81,7 +81,7 @@
 					<minmemory>256m</minmemory>
 					<maxmemory>640m</maxmemory>
 					<links>
-						<link>http://docs.guava-libraries.googlecode.com/git-history/v17.0/javadoc/</link>
+						<link>http://docs.guava-libraries.googlecode.com/git-history/v18.0/javadoc/</link>
 						<link>http://joda-time.sourceforge.net/api-release</link>
 						<link>http://docs.jboss.org/hibernate/core/3.6/javadocs</link>
 						<link>http://docs.oracle.com/javaee/6/api</link>
@@ -98,7 +98,7 @@
 			<dependency>
 				<groupId>net.derquinse</groupId>
 				<artifactId>derquinse-common-base</artifactId>
-				<version>1.0.36</version>
+				<version>1.0.37</version>
 			</dependency>
 			<!-- Hibernate -->
 			<dependency>
