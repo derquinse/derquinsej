@@ -23,6 +23,7 @@ import java.sql.Types;
 import java.util.UUID;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 import com.google.common.base.Objects;
@@ -66,12 +67,12 @@ public class UUIDUserType implements UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner) throws HibernateException, SQLException {
+	public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner) throws HibernateException, SQLException {
 		final String uuid = rs.getString(names[0]);
 		return uuid == null ? null : UUID.fromString(uuid);
 	}
-
-	public void nullSafeSet(PreparedStatement st, Object value, int index) throws HibernateException, SQLException {
+	
+	public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session) throws HibernateException, SQLException {
 		final String uuid = (value == null) ? null : value.toString().toLowerCase();
 		st.setString(index, uuid);
 	}

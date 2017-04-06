@@ -3,23 +3,23 @@
 	<parent>
 		<artifactId>derquinsej</artifactId>
 		<groupId>net.sf.derquinsej</groupId>
-		<version>0.2.3</version>
+		<version>0.2.4-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>derquinsej-hib3</artifactId>
+	<artifactId>derquinsej-hib5</artifactId>
 	<name>Derquinse Modules for Java :: Hibernate3</name>
 	<description />
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.derquinsej</groupId>
 			<artifactId>derquinsej-test-support</artifactId>
-			<version>0.2.3</version>
+			<version>0.2.4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.derquinsej</groupId>
 			<artifactId>derquinsej-core</artifactId>
-			<version>0.2.3</version>
+			<version>0.2.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
