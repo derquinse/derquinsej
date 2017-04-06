@@ -10,7 +10,7 @@
 	<artifactId>derquinsej</artifactId>
 	<packaging>pom</packaging>
 	<name>Derquinse Modules for Java</name>
-	<version>0.2.3</version>
+	<version>0.2.4-SNAPSHOT</version>
 	<description />
 	<url>http://derquinsej.sf.net</url>
 	<developers>
@@ -104,7 +104,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>3.6.10.Final</version>
+				<version>5.2.9.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -176,7 +176,7 @@
 	</dependencies>
 	<modules>
 		<module>derquinsej-core</module>
-		<module>derquinsej-hib3</module>
+		<module>derquinsej-hib5</module>
 		<module>derquinsej-test-support</module>
 	</modules>
 	<profiles>
